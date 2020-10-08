@@ -3,11 +3,11 @@ Makes a backup of all your repositories and gists from GitHub
 # install
 From Pypi:
 
-`pip install gitback`
+`python -m pip install gitback`
 
 From GitHub:
 
-`pip install git+https://github.com/donno2048/gitback`
+`python -m pip install git+https://github.com/donno2048/gitback`
 # Usage
 ```
 usage: python -m gitback [-h] [-n] [-P] [-s] [-f] [-z] [-q] -u  -p  [-r | -g]
