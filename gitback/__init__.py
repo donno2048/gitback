@@ -11,24 +11,20 @@ def backup()->None:
     parser.add_argument('-f', '--full', action='store_true', help='Clone with full git history')
     parser.add_argument('-z', '--zip', action='store_true', help='Make a zip file of the backup')
     parser.add_argument('-q', '--quiet', action='store_true', help='Don\'t see cloning progress')
-    parser.add_argument('-u', '--username', metavar='', required=True, type=str, help='Your GitHub username')
-    parser.add_argument('-p', '--password', metavar='', required=True, type=str, help='Your GitHub password')
+    parser.add_argument('-u', '--username', metavar='', type=str, help='Your GitHub username')
+    parser.add_argument('-p', '--password', metavar='', type=str, help='Your GitHub password')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-r', '--repos', action='store_true', help='Backup only repos')
     group.add_argument('-g', '--gists', action='store_true', help='Backup only gists')
     args = parser.parse_args()
     if args.path is not None: chdir(args.path)
     name = 'backup' if args.name is None else args.name
-    if exists(name+'.zip') and args.zip:
-        print(f'You already have a {name} zip, please move it somewhere else until the process is done')
-        exit()
+    if exists(name+'.zip') and args.zip: exit(f'You already have a {name} zip, please move it somewhere else until the process is done')
     if args.zip: backup = ZipFile(name+'.zip', 'w', 8)
     try: mkdir(name)
-    except:
-        print(f'You already have a {name} folder, please move it somewhere else until the process is done')
-        exit()
+    except: exit(f'You already have a {name} folder, please move it somewhere else until the process is done')
     chdir(name)
-    me, git_command = Github(args.username,args.password).get_user(), 'git clone '
+    me, git_command = Github(args.username if args.username is not None else input("Your GitHub username: "), args.password if args.password is not None else input("Your GitHub password: ")).get_user(), 'git clone '
     if not args.full: git_command += '--depth 1 '
     if args.quiet: git_command += '-q '
     repo_clone_command = 'https://github.com/' if not args.ssh else 'git@github.com:'
