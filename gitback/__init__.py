@@ -13,7 +13,6 @@ def backup()->None:
     parser.add_argument('-z', '--zip', action='store_true', help='Make a zip file of the backup')
     parser.add_argument('-q', '--quiet', action='store_true', help='Don\'t see cloning progress')
     parser.add_argument('-u', '--username', metavar='', type=str, help='Your GitHub username')
-    parser.add_argument('-p', '--password', metavar='', type=str, help='Your GitHub password')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-r', '--repos', action='store_true', help='Backup only repos')
     group.add_argument('-g', '--gists', action='store_true', help='Backup only gists')
@@ -32,9 +31,9 @@ def backup()->None:
     gist_clone_command = 'https://gist.github.com/' if not args.ssh else 'git@gist.github.com:'
     if not args.repos:
         for gist in loads(urlopen(f"https://api.github.com/users/donno2048/gists?type=all&per_page=1000").read()):
-            system(git_command + gist_clone_command + gist.id)
-            if args.zip: backup.write(getcwd() + '\\' + gist.id, arcname = gist.id)
+            system(git_command + gist_clone_command + gist["id"])
+            if args.zip: backup.write(getcwd() + '\\' + gist["id"], arcname = gist["id"])
     if not args.gists:
         for repo in loads(urlopen(f"https://api.github.com/users/donno2048/repos?type=all&per_page=1000").read()):
-            system(git_command + repo_clone_command + repo.full_name)
-            if args.zip: backup.write(getcwd() + '\\' + repo.name, arcname = repo.name)
+            system(git_command + repo_clone_command + repo["full_name"])
+            if args.zip: backup.write(getcwd() + '\\' + repo["name"], arcname = repo["name"])
