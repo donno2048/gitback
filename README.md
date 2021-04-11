@@ -23,7 +23,6 @@ optional arguments:
   -z, --zip         Make a zip file of the backup
   -q, --quiet       Don't see cloning progress
   -u, --username    Your GitHub username
-  -p, --password    Your GitHub password
   -r, --repos       Backup only repos
   -g, --gists       Backup only gists
 ```
