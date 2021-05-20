@@ -1,7 +1,7 @@
 from setuptools import setup,find_packages
 setup(
     name='gitback',
-    version='1.0.6',
+    version='1.0.7',
     description='Makes a backup of all your repositories and gists from GitHub',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
