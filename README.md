@@ -1,15 +1,19 @@
 # gitback
 Makes a backup of all your repositories and gists from GitHub
-# install
-From Pypi:
 
-`python -m pip install gitback`
+## Install
 
-From GitHub:
+### From PyPI
 
-`python -m pip install git+https://github.com/donno2048/gitback`
-# Usage
-```
+`pip3 install gitback`
+
+### From GitHub
+
+`pip3 install git+https://github.com/donno2048/gitback`
+
+## Usage
+
+```py
 usage: gitback [-h] [-n] [-P] [-s] [-f] [-z] [-q] [-u] [-p]  [-r | -g]
 
 Makes a backup of all your repositories and gists from GitHub
@@ -25,4 +29,12 @@ optional arguments:
   -u, --username    Your GitHub username
   -r, --repos       Backup only repos
   -g, --gists       Backup only gists
+```
+
+### Example
+
+Let's say I want to backup only my gists, and I want a zip file:
+
+```sh
+gitback -u donno2048 -g -z
 ```
