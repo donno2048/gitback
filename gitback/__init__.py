@@ -30,10 +30,14 @@ def backup()->None:
     repo_clone_command = 'https://github.com/' if not args.ssh else 'git@github.com:'
     gist_clone_command = 'https://gist.github.com/' if not args.ssh else 'git@gist.github.com:'
     if not args.repos:
-        for gist in loads(urlopen(f"https://api.github.com/users/donno2048/gists?type=all&per_page=1000").read()):
-            system(git_command + gist_clone_command + gist["id"])
-            if args.zip: backup.write(getcwd() + '/' + gist["id"], arcname = gist["id"])
+        i = 0
+        while len(result := loads(urlopen(f"https://api.github.com/users/{username}/gists?type=all&per_page=100&page=%i" % (i := i + 1)).read())):
+            for gist in result:
+                system(git_command + gist_clone_command + gist["id"])
+                if args.zip: backup.write(getcwd() + '/' + gist["id"], arcname = gist["id"])
     if not args.gists:
-        for repo in loads(urlopen(f"https://api.github.com/users/donno2048/repos?type=all&per_page=1000").read()):
-            system(git_command + repo_clone_command + repo["full_name"])
-            if args.zip: backup.write(getcwd() + '/' + repo["name"], arcname = repo["name"])
+        i = 0
+        while len(result := loads(urlopen(f"https://api.github.com/users/{username}/repos?type=all&per_page=100&page=%i" % (i := i + 1)).read())):
+            for repo in result:
+                system(git_command + repo_clone_command + repo["full_name"])
+                if args.zip: backup.write(getcwd() + '/' + repo["name"], arcname = repo["name"])
