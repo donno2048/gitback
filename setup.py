@@ -10,7 +10,7 @@ setup(
     license='MIT',
     author='Elisha Hollander',
     classifiers=['Programming Language :: Python :: 3'],
-    install_requires=['six==1.14.0'],
+    install_requires=['six>=1.14.0'],
     entry_points={ 'console_scripts': [ 'gitback=gitback.__init__:backup' ] },
     python_requires='>3.8'
 )
