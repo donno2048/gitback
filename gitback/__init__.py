@@ -22,7 +22,7 @@ def backup()->None:
     if exists(name+'.zip') and args.zip: exit(f'You already have a {name} zip, please move it somewhere else until the process is done')
     if args.zip: backup = ZipFile(name+'.zip', 'w', 8)
     try: mkdir(name)
-    except: exit(f'You already have a {name} folder, please move it somewhere else until the process is done')
+    except FileExistsError: exit(f'You already have a {name} folder, please move it somewhere else until the process is done')
     chdir(name)
     username, git_command = args.username if args.username is not None else input("Your GitHub username: "), 'git clone '
     if not args.full: git_command += '--depth 1 '
