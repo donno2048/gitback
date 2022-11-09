@@ -2,7 +2,7 @@ from os import system, chdir, mkdir, getcwd
 from os.path import exists
 from zipfile import ZipFile
 from argparse import ArgumentParser
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 from json import loads
 def backup()->None:
     parser = ArgumentParser(description='Makes a backup of all your repositories and gists from GitHub')
