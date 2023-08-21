@@ -4,6 +4,8 @@ Makes a backup of all your repositories and gists from GitHub
 
 ## Install
 
+(On Linux you'll need to use `sudo`)
+
 ### From PyPI
 
 `pip3 install gitback`
@@ -13,6 +15,8 @@ Makes a backup of all your repositories and gists from GitHub
 `pip3 install git+https://github.com/donno2048/gitback`
 
 ## Usage
+
+You can also use `git backup` instead of `gitback`.
 
 ```py
 usage: gitback [-h] [-n] [-P] [-s] [-f] [-z] [-q] [-u] [-p]  [-r | -g]
