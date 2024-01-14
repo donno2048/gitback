@@ -36,13 +36,15 @@ def backup()->None:
     gist_clone_command = 'https://gist.github.com/' if not args.ssh else 'git@gist.github.com:'
     if not args.repos:
         i = 0
-        while len(result := loads(urlopen(f"https://api.github.com/users/{username}/gists?type=all&per_page=100&page=%i" % (i := i + 1)).read())):
+        while len(result := loads(urlopen(f"https://api.github.com/users/{username}/gists?type=all&per_page=100&page={i}").read())):
             for gist in result:
                 Popen('git' + git_command + gist_clone_command + gist["id"], shell = True, stdout = PIPE)
                 if args.zip: backup.write(getcwd() + '/' + gist["id"], arcname = gist["id"])
+            i += 1
     if not args.gists:
         i = 0
-        while len(result := loads(urlopen(f"https://api.github.com/users/{username}/repos?type=all&per_page=100&page=%i" % (i := i + 1)).read())):
+        while len(result := loads(urlopen(f"https://api.github.com/users/{username}/repos?type=all&per_page=100&page={i}").read())):
             for repo in result:
                 Popen('git' + git_command + repo_clone_command + repo["full_name"], shell = True, stdout = PIPE)
                 if args.zip: backup.write(getcwd() + '/' + repo["name"], arcname = repo["name"])
+            i += 1
