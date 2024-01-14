@@ -1,4 +1,4 @@
-from os import chdir, mkdir, getcwd
+from os import chdir, mkdir, rmdir, getcwd
 from os.path import exists
 from subprocess import Popen
 from zipfile import ZipFile
@@ -24,7 +24,11 @@ def backup()->None:
     if exists(name+'.zip') and args.zip: exit(f'You already have a {name} zip, please move it somewhere else until the process is done')
     if args.zip: backup = ZipFile(name+'.zip', 'w', 8)
     try: mkdir(name)
-    except FileExistsError: exit(f'You already have a {name} folder, please move it somewhere else until the process is done')
+    except FileExistsError:
+        try:
+            rmdir(name)
+            mkdir(name)
+        except OSError: exit(f'You already have a {name} folder, please move it somewhere else until the process is done')
     chdir(name)
     if not args.full: git_command += '--depth 1 '
     if args.quiet: git_command += '-q '
