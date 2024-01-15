@@ -8,11 +8,15 @@ Makes a backup of all your repositories and gists from GitHub
 
 ### From PyPI
 
-`pip3 install gitback`
+```sh
+pip3 install gitback
+```
 
 ### From GitHub
 
-`pip3 install git+https://github.com/donno2048/gitback`
+```sh
+pip3 install git+https://github.com/donno2048/gitback
+```
 
 ## Usage
 
