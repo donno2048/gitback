@@ -46,4 +46,4 @@ def backup()->None:
                 Popen('git' + git_command + repo_clone_command + repo["full_name"], shell = True, stdout = PIPE).wait()
             i += 1
     chdir('..')
-    make_archive(name + '.zip', 'zip', name)
+    make_archive(name, 'zip', name)
